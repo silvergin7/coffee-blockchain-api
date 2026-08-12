@@ -16,3 +16,21 @@ describe('GET /blockchain', () => {
     });
   });
 });
+
+describe('POST /transactions', () => {
+  it('adds a valid transaction to pendingTransactions and returns 201', async () => {
+    const transaction = {
+      sender: 'farm',
+      recipient: 'roaster',
+      batchId: 'B1',
+      weightKg: 50,
+    };
+
+    const response = await request(app)
+      .post('/transactions')
+      .send(transaction);
+
+    expect(response.status).toBe(201);
+    expect(app.locals.blockchain.pendingTransactions).toEqual([transaction]);
+  });
+});
