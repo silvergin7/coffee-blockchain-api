@@ -62,6 +62,11 @@ class Blockchain {
     this.pendingTransactions = [];
     return block;
   }
+
+  addTransaction(transaction) {
+    this.pendingTransactions.push(transaction);
+    return this.pendingTransactions.length;
+  }
 }
 
 module.exports = { calculateHash, Blockchain };
