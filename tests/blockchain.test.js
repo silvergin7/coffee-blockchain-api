@@ -69,3 +69,20 @@ describe('Blockchain#mineBlock', () => {
     expect(blockchain.pendingTransactions).toEqual([]);
   });
 });
+
+describe('Blockchain#addTransaction', () => {
+  it('adds a transaction to pendingTransactions and returns the updated count', () => {
+    const transaction = {
+      sender: 'farm',
+      recipient: 'roaster',
+      batchId: 'B1',
+      weightKg: 50,
+    };
+
+    const blockchain = new Blockchain();
+    const pendingCount = blockchain.addTransaction(transaction);
+
+    expect(pendingCount).toBe(1);
+    expect(blockchain.pendingTransactions).toEqual([transaction]);
+  });
+});
