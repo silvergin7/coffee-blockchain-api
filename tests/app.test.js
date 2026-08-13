@@ -87,6 +87,13 @@ describe('POST /transactions', () => {
       expect(app.locals.blockchain.pendingTransactions).toEqual([]);
     },
   );
+
+  it('returns 400 when the request has no body and does not add a transaction', async () => {
+    const response = await request(app).post('/transactions');
+
+    expect(response.status).toBe(400);
+    expect(app.locals.blockchain.pendingTransactions).toEqual([]);
+  });
 });
 
 describe('POST /mine', () => {
