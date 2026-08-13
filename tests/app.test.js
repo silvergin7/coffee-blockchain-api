@@ -50,6 +50,21 @@ describe('POST /transactions', () => {
     expect(response.status).toBe(201);
     expect(app.locals.blockchain.pendingTransactions).toEqual([transaction]);
   });
+
+  it('returns 400 when batchId is missing and does not add a transaction', async () => {
+    const invalidTransaction = {
+      sender: 'farm',
+      recipient: 'roaster',
+      weightKg: 50,
+    };
+
+    const response = await request(app)
+      .post('/transactions')
+      .send(invalidTransaction);
+
+    expect(response.status).toBe(400);
+    expect(app.locals.blockchain.pendingTransactions).toEqual([]);
+  });
 });
 
 describe('POST /mine', () => {
