@@ -17,6 +17,11 @@ function createApp() {
     res.status(201).json(req.body);
   });
 
+  app.post('/mine', (req, res) => {
+    const block = blockchain.mineBlock();
+    res.status(201).json(block);
+  });
+
   return app;
 }
 
