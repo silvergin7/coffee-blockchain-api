@@ -1,6 +1,12 @@
+const requiredFields = ['sender', 'recipient', 'batchId', 'weightKg'];
+
 function validateTransaction(req, res, next) {
-  if (!req.body || !req.body.batchId) {
-    return res.status(400).json({ error: 'batchId is required' });
+  const missingField = requiredFields.find(
+    (field) => !req.body || !(field in req.body),
+  );
+
+  if (missingField) {
+    return res.status(400).json({ error: `${missingField} is required` });
   }
 
   next();
