@@ -1,6 +1,12 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import request from 'supertest';
-import app from '../src/app.js';
+import { createApp } from '../src/app.js';
+
+let app;
+
+beforeEach(() => {
+  app = createApp();
+});
 
 describe('GET /blockchain', () => {
   it('returns the full chain including the genesis block', async () => {
