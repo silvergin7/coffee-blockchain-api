@@ -65,6 +65,28 @@ describe('POST /transactions', () => {
     expect(response.status).toBe(400);
     expect(app.locals.blockchain.pendingTransactions).toEqual([]);
   });
+
+  const validTransaction = {
+    sender: 'farm',
+    recipient: 'roaster',
+    batchId: 'B1',
+    weightKg: 50,
+  };
+
+  it.each(['sender', 'recipient', 'weightKg'])(
+    'returns 400 when %s is missing and does not add a transaction',
+    async (missingField) => {
+      const transaction = { ...validTransaction };
+      delete transaction[missingField];
+
+      const response = await request(app)
+        .post('/transactions')
+        .send(transaction);
+
+      expect(response.status).toBe(400);
+      expect(app.locals.blockchain.pendingTransactions).toEqual([]);
+    },
+  );
 });
 
 describe('POST /mine', () => {
