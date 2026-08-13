@@ -1,5 +1,6 @@
 const express = require('express');
 const { Blockchain } = require('./blockchain.js');
+const { validateTransaction } = require('./validation.js');
 
 function createApp() {
   const app = express();
@@ -12,7 +13,7 @@ function createApp() {
     res.status(200).json(blockchain.chain);
   });
 
-  app.post('/transactions', (req, res) => {
+  app.post('/transactions', validateTransaction, (req, res) => {
     blockchain.addTransaction(req.body);
     res.status(201).json(req.body);
   });
