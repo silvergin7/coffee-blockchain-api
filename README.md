@@ -181,7 +181,23 @@ Current result:
 
 ## TDD workflow
 
-Validation behavior was added test-first as Express middleware, separate from the `Blockchain` domain class.
+Core blockchain behavior and API validation were developed test-first.
+Validation is implemented as Express middleware, separate from the
+`Blockchain` domain class.
+
+### Red → green: hash calculation and mining
+
+Core blockchain behavior was also developed test-first.
+
+#### Calculate block hashes
+
+- Red: [Test: red - calculate hash](https://github.com/silvergin7/coffee-blockchain-api/commit/74e96a2)
+- Green: [Feat: green - calculate hash](https://github.com/silvergin7/coffee-blockchain-api/commit/68b34b4)
+
+#### Mine blocks
+
+- Red: [Test: red - mine block](https://github.com/silvergin7/coffee-blockchain-api/commit/9f96d6b)
+- Green: [Feat: green - mine block](https://github.com/silvergin7/coffee-blockchain-api/commit/2cfddef)
 
 ### Red → green: validate batchId
 
